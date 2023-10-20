@@ -3,48 +3,59 @@ import PizzaComponent from "./PizzaComponent";
 //import { ReactDOM } from "react";
 import pizzaData from "./data";
 
-import "./index.css"
+import "./index.css";
 const Header = () => {
-  const str={ color: "red" ,fontSize:"25px",textTransform:"uppercase"};
+  const str = { color: "red", fontSize: "25px", textTransform: "uppercase" };
   return (
     <div className="header footer">
-      <h1 style={str}><b>The React Pizza Company</b></h1>
+      <h1 style={str}>
+        <b>The React Pizza Company</b>
+      </h1>
     </div>
   );
 };
 
 const Menu = () => {
-    console.log(pizzaData)
-  /*return (pizzaData.forEach(element => {
-    <div className="menu">
-      <h2>Our Menu</h2>
-      <PizzaComponent title={element.name} image={element.image} ingredients={element.ingredients}/>
-    </div>
-  })); */
+  //const pizzas=[];
+  const pizzas = pizzaData;
+  console.log(pizzaData);
   return (
     <div className="menu">
-        {/* <PizzaComponent title="s" image="1.jpg" ingredients="Coke"/> */}
       <h2>Our Menu</h2>
-      {
-          pizzaData.map((element,key) => {
-            return <PizzaComponent key={key} {...element}/>
-          })
-      }
+
+      {pizzas.length > 0 && (
+        <ul className="pizzas">
+          {pizzaData.map((element, key) => {
+            return <PizzaComponent key={key} {...element} />;
+          })}
+        </ul>
+      )}
     </div>
   );
-
-
 };
 
 const Footer = () => {
-  const hour = new Date().getHours();
-  console.log(hour);
+  //const hour = new Date().getHours();
+  const hour = 40;
+  const openHour = 1;
+  const closeHour = 12;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
 
-  return (
-    <footer className="header footer">
-      <h4>{new Date().toLocaleTimeString()} We Are closing Soon !!</h4>
-    </footer>
-  );
+  if (!isOpen)
+    return (
+      <p>
+        We're happy to welcome you between {openHour}:00 and {closeHour}:00 .
+      </p>
+    );
+
+    return (
+      <footer className="footer">
+        {/* <h4>{ isOpen && <p> We are open </p> }</h4> */}
+        <h4>{isOpen ? <p> We are open </p> : <p>XX</p>}</h4>
+        <button className="btn">Order</button>
+      </footer>
+    );
 };
 
 function Pizza() {

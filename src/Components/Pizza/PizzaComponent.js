@@ -2,12 +2,16 @@ import React from "react";
 
 function PizzaComponent(props) {
   return (
-    <div>
-      <h1>{props.name}</h1>
-      <h3>{props.ingredients}</h3>
-      <h3>{props.price}</h3>
-      <img src={props.photoName} alt="Not Found" />
-    </div>
+    <>
+      <li className="pizza">
+        <img src={props.photoName} alt="Not Found" />
+        <div >
+          <h3>{props.name}</h3>
+          <p>{props.ingredients}</p>
+          <span>{props.price}</span>
+        </div>
+      </li>
+    </>
   );
 }
 
